@@ -36,7 +36,7 @@ t = []
 while (l < len(k)):
     t.append(re.findall(r"<p>.*</p>", k[l]))
     l = l + 1
-print(t[0])
+print(t[0])cd 
 print(t[1])
 print(t[2])
 print(t[3])
