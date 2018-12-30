@@ -20,9 +20,7 @@ while(i<len(s)):
     string=s[i]
     links.append(string[6:-1])
     i=i+1
-print(links)
 
 
-    print(link)
 #newdata= re.search(regex, data)
 #print(newdata)
