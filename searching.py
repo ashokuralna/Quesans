@@ -1,9 +1,7 @@
-# script to crawl website
-
 import urllib.request
 import re
 baseurl="https://www.bing.com/search?q="
-oquery="what is the capital of india"
+oquery="who is the prime minister of India?"
 squery= oquery.replace(' ', '+')
 query = baseurl+squery
 #print(query)
@@ -20,7 +18,29 @@ while(i<len(s)):
     string=s[i]
     links.append(string[6:-1])
     i=i+1
+print(len(links))
+webdata=[]
+
+for i in range(len(links)):
+    webdata.append((urllib.request.urlopen(links[i]).read()))
+
+k = []
+j = 0;
+while (j < len(webdata)):
+    k.append(str(webdata[j]))
+    j = j + 1
+    #print(k)
+
+l = 0;
+t = []
+while (l < len(k)):
+    t.append(re.findall(r"<p>.*</p>", k[l]))
+    l = l + 1
+print(t[0])
+print(t[1])
+print(t[2])
+print(t[3])
+print(t[4])
 
 
-#newdata= re.search(regex, data)
-#print(newdata)
+
