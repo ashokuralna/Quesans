@@ -1,3 +1,5 @@
+# script to crawl website
+
 import urllib.request
 import re
 baseurl="https://www.bing.com/search?q="
