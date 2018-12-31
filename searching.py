@@ -1,7 +1,10 @@
 import urllib.request
+from inscriptis import get_text
 import re
+from nltk.tokenize import word_tokenize
+
 baseurl="https://www.bing.com/search?q="
-oquery="who is the prime minister of India?"
+oquery="who is the chief minister of Delhi?"
 squery= oquery.replace(' ', '+')
 query = baseurl+squery
 #print(query)
@@ -19,28 +22,44 @@ while(i<len(s)):
     links.append(string[6:-1])
     i=i+1
 print(len(links))
-webdata=[]
+print(links)
+html=[]
+text=[]
+for j in range(len(links)):
+    html.append(urllib.request.urlopen(links[j]).read().decode('utf-8'))
+    text.append(get_text(html[j]))
+    #print("This is text number ", j)
+    #print(text[j])
 
-for i in range(len(links)):
-    webdata.append((urllib.request.urlopen(links[i]).read()))
+tokenized_data=[]
+k=0;
+while(k<len(text)):
+    tokenized_data.append(word_tokenize(text[k]))
+    print("This is tokenized data number ",k)
+    print(tokenized_data[k])
+    k=k+1
 
-k = []
-j = 0;
-while (j < len(webdata)):
-    k.append(str(webdata[j]))
-    j = j + 1
+
+
+
+
+
+#print(len(links))
+#print(links)
+#webdata=[]
+
+#for i in range(len(links)):
+   # webdata.append((urllib.request.urlopen(links[i]).read()))
+
+#k = []
+#j = 0;
+#while (j < len(webdata)):
+  #  k.append(str(webdata[j]))
+ #   j = j + 1
     #print(k)
 
-l = 0;
-t = []
-while (l < len(k)):
-    t.append(re.findall(r"<p>.*</p>", k[l]))
-    l = l + 1
-print(t[0])cd 
-print(t[1])
-print(t[2])
-print(t[3])
-print(t[4])
-
-
-
+#l = 0;
+#t = []
+#while (l < len(k)):
+  #  t.append(re.findall(r"<p>.*</p>", k[l]))
+  #  l = l + 1
