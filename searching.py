@@ -2,7 +2,7 @@ import urllib.request
 from inscriptis import get_text
 import re
 from nltk.tokenize import word_tokenize
-
+import nltk
 baseurl="https://www.bing.com/search?q="
 oquery="who is the chief minister of Delhi?"
 squery= oquery.replace(' ', '+')
@@ -38,6 +38,16 @@ while(k<len(text)):
     print("This is tokenized data number ",k)
     print(tokenized_data[k])
     k=k+1
+
+ #empty to array to hold all nouns
+count=0
+word=[]
+for r in range(len(tokenized_data)):
+    for word,pos in nltk.pos_tag(nltk.word_tokenize(tokenized_data[r])):
+        if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+            count+=1
+            print(word)
+            r=r+1
 
 
 
