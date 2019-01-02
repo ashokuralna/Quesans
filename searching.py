@@ -1,5 +1,6 @@
 import urllib.request
 from inscriptis import get_text
+from nltk.corpus import stopwords
 import re
 from nltk.tokenize import word_tokenize
 import nltk
@@ -35,22 +36,39 @@ tokenized_data=[]
 k=0;
 while(k<len(text)):
     tokenized_data.append(word_tokenize(text[k]))
-    print("This is tokenized data number ",k)
-    print(tokenized_data[k])
+   # print("This is tokenized data number ",k)
+    #print(tokenized_data[k])
     k=k+1
 
- #empty to array to hold all nouns
-count=0
-word=[]
-for r in range(len(tokenized_data)):
-    for word,pos in nltk.pos_tag(nltk.word_tokenize(tokenized_data[r])):
-        if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
-            count+=1
-            print(word)
-            r=r+1
+stop_words = set(stopwords.words('english'))
+#print(tokenized_data)
+filtered_sentence = []
 
+i=0
+while(i<len(tokenized_data)):
+    newword_list=[]
+    for w in tokenized_data[i]:
+        if w not in stop_words:
+            newword_list.append(w)
+    filtered_sentence.append(newword_list)
+    i=i+1
+#print(filtered_sentence)
 
+#for items in filtered_sentence:
+ #   print(items)
+nouns_list=[]
+for r in range(len(filtered_sentence)):
+    word_list = []
+    for word,pos in nltk.pos_tag(filtered_sentence[r]):
+         # print(pos)
+         if (pos == 'NN' or pos == 'NNP' or pos == 'NNS' or pos == 'NNPS'):
+             word_list.append(word)
+    nouns_list.append(word_list)
 
+print(nouns_list)
+
+for items in nouns_list:
+    print(items)
 
 
 
